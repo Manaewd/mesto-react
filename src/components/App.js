@@ -10,9 +10,15 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
-  const handleEditProfileClick = () => { setIsEditProfilePopupOpen(true) }
-  const handleAddPlaceClick = () => { setIsAddPlacePopupOpen(true) }
-  const handleEditAvatarClick = () => { setIsEditAvatarPopupOpen(true) }
+  const handleEditProfileClick = () => { setIsEditProfilePopupOpen(true) };
+  const handleAddPlaceClick = () => { setIsAddPlacePopupOpen(true) };
+  const handleEditAvatarClick = () => { setIsEditAvatarPopupOpen(true) };
+
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+  }
 
   return (
     <div className="page">
@@ -30,6 +36,7 @@ function App() {
     textButton='Сохранить'
     nameForm='edit'
     isOpen={isEditProfileOpen}
+    onClose={closeAllPopups}
     >
           <input id="input-edit-name" minlength="2" maxlength="40" type="text" name="profilename" placeholder="Ваше имя" className="popup__item popup__item_type_name" required></input>
           <span id="input-edit-name-error" className="popup__error"/>
@@ -43,6 +50,7 @@ function App() {
     textButton='Создать'
     nameForm='add'
     isOpen={isAddPlacePopupOpen}
+    onClose={closeAllPopups}
     >
           <input id="input-add-name" required minlength="2" maxlength="30" type="text" name="name" placeholder="Название" className="popup__item popup__item_add_name"></input>
           <span id="input-add-name-error" className="popup__error"/>
@@ -56,6 +64,7 @@ function App() {
       textButton='Сохранить'
       isOpen={isEditAvatarPopupOpen}
       nameForm='avatar'
+      onClose={closeAllPopups}
       >
             <input className="popup__item popup__item_enter_avatar" type="url" name="avatar" id="input-avatar" placeholder="Ссылка на картинку" required></input>
             <span className="popup__error" id="input-avatar-error"/>
