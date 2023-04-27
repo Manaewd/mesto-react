@@ -13,4 +13,4 @@ ___
 ### Применены хуки
 ### Методология БЭМ.
 
-[Ссылка на сайт.](https://manaewd.github.io/mesto/)
+[Ссылка на сайт.](https://manaewd.github.io/mesto-react/)
