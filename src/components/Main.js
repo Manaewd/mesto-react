@@ -1,5 +1,6 @@
 import React from "react"
-import api from "../utils/Api"
+import api from "../utils/api"
+import Card from "./Card"
 
 function Main(props) {
 
@@ -7,17 +8,25 @@ function Main(props) {
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
 
-
+  const [cards, setCards] = React.useState([]);
   
 React.useEffect(() => {
-  api.getUserInfo().then( data => {
-    setUserName(data.name)
-    setUserDescription(data.about)
-    setUserAvatar(data.avatar)
+  api.getUserInfo().then( userData => {
+    setUserName(userData.name)
+    setUserDescription(userData.about)
+    setUserAvatar(userData.avatar)
   }).catch((err) => 
     console.log(err)
   )
-})
+});
+
+React.useEffect(() => {
+  api.getInitialCards().then( cardsData => {
+    setCards(cardsData)
+  }).catch((err) => 
+    console.log(err)
+  )
+}, []);
 
     return (
         <main>
@@ -32,21 +41,15 @@ React.useEffect(() => {
           </div>
           <button type={"button"} className="profile__add-button" onClick={props.onAddPlace}></button>
         </section>
-        <section className="elements">
-          <template className="template">
-            <article className="element">
-              <button type={"button"} className="element__trash-button"></button>
-              <img className="element__image" src="#" alt="" />
-              <div className="element__container">
-                <h2 className="element__title"></h2>
-                <div className="element__container-like">
-                <button type={"button"} className="element__button" aria-label="like"></button>
-                <p className="element__like-meter">0</p>
-                </div>
-              </div>
-            </article>
-          </template>
-        </section>
+        <div className="elements">
+            {cards.map((card) => (
+              <Card
+                card={card}                
+                key={card._id}
+                onCardClick={props.onCardClick}
+              />
+            ))}           
+        </div>
       </main>
     )
 }
