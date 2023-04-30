@@ -5,7 +5,6 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
-import '../index.css';
 
 function App() {
   const [isEditProfileOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -128,9 +127,13 @@ function App() {
         name="delete"
         title="Вы уверены?"
         textButton="Да"
+        onClose={closeAllPopups}
       ></PopupWithForm>
 
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+        />
     </div>
   );
 }
