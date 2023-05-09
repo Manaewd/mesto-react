@@ -22,11 +22,11 @@ function Card({ onCardClick, onCardDelete, card, onCardLike }) {
   return (
     <div className="element">
       {isOwn &&
-      <button
-      type={"button"}
-      className="element__trash-button"
-      onClick={handleDeleteClick}
-      />}
+        <button
+          type={"button"}
+          className="element__trash-button"
+          onClick={handleDeleteClick}>
+        </button>}
       <img
         className="element__image"
         src={card.link}

@@ -30,11 +30,6 @@ function App() {
     setSelectedCard(card);
   };
 
-
-  const handleDeleteClick = (card) => {
-    setSelectedCard(card);
-  };
-
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -61,8 +56,15 @@ function App() {
           setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
       .catch((err) => console.log(err));
-  } 
+  };
 
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        setCards(cards => cards.filter((c) => c._id !== card._id))
+      })
+      .catch((err) => console.log(err));
+    };
   
 
   return (
@@ -76,7 +78,7 @@ function App() {
         onCardClick={handleCardClick}
         cards={cards}
         onCardLike={handleCardLike}
-        onDeleteClick={handleDeleteClick}
+        onCardDelete={handleCardDelete}
       />
       <Footer />
       <PopupWithForm
