@@ -76,19 +76,19 @@ export class Api {
       }
     
     // Метод отправки данных об установке/снятии лайка на сервер
-    likeCard(id) {
+    changeLikeCardStatus(id, isLiked) {
+      if (isLiked) {
         return fetch(`${this._url}/cards/${id}/likes`, {
           method: 'PUT',
           headers: this._headers,
         }).then(res => this._checkResponse(res));
+      } else {
+          return fetch(`${this._url}/cards/${id}/likes`, {
+            method: 'DELETE',
+            headers: this._headers,
+          }).then(res => this._checkResponse(res));
       }
-    
-      deleteLike(id) {
-        return fetch(`${this._url}/cards/${id}/likes`, {
-          method: 'DELETE',
-          headers: this._headers,
-        }).then(res => this._checkResponse(res));
-      }
+    }
 }
 
 const api = new Api({
