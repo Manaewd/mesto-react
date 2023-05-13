@@ -21,14 +21,13 @@ export class Api {
     }
 
     // Метот передачи данных пользователя на сервер
-    setUserInfo({ profilename, profilejob, avatar }) {
+    setUserInfo({ data }) {
         return fetch(`${this._url}/users/me`, {
           method: 'PATCH',
           headers: this._headers,
           body: JSON.stringify({
-            name: profilename,
-            about: profilejob,
-            avatar: avatar
+            name: data.name,
+            about: data.about,
           }) 
         })
         .then(res => this._checkResponse(res))
@@ -43,25 +42,25 @@ export class Api {
     }
 
       // Метод передачи на сервер новых данных о пользователе 
-    setUserAvatar({ avatar }) {
+    setUserAvatar( avatar ) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatar
+        avatar
       })
     })
     .then(res => this._checkResponse(res));
     }
 
     // Метод передачи на сервер новых данных о пользователе 
-    addNewCard({ name, link }) {
+    addNewCard( name, link ) {
         return fetch(`${this._url}/cards`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
-                name: name,
-                link: link
+                name,
+                link
             })
         })
         .then(res => this._checkResponse(res));
