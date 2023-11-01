@@ -1,4 +1,4 @@
-# Учебный проект Mesto-React
+# Проект Mesto-React
 
 **Технологии:**
 * React.js
